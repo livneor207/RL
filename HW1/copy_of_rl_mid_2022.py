@@ -22,13 +22,6 @@ Student 2:Name: Oz Sharlin , ID: 200705754
 ## Installs
 """
 
-!pip install gym
-!pip install pygame
-!apt-get install python-opengl -y
-!apt install xvfb -y
-!pip install pyvirtualdisplay
-!pip install piglet
-!pip install pyvirtualdisplay
 
 """## Imports"""
 
@@ -36,7 +29,6 @@ Student 2:Name: Oz Sharlin , ID: 200705754
 import numpy as np
 import gym
 from gym import logger as gymlogger
-from gym.wrappers import Monitor
 from gym.utils import seeding
 from gym import error, spaces, utils
 gymlogger.set_level(40) # error only
@@ -63,11 +55,6 @@ The cell below contains the video display configuration. No need to make changes
 display = Display(visible=0, size=(1400, 900))
 display.start()
 
-
-
-if type(os.environ.get("DISPLAY")) is not str or len(os.environ.get("DISPLAY"))==0:
-    !bash ../xvfb start
-#     %env DISPLAY=:1
 
 
 
@@ -292,22 +279,22 @@ class MazeView2D:
             self.__robot = desire_state
            
 
-    def move_robot(self, dir):
-        if dir not in self.__maze.COMPASS.keys():
-            raise ValueError("dir cannot be %s. The only valid dirs are %s."
-#                              % (str(dir), str(self.__maze.COMPASS.keys())))
+#     def move_robot(self, dir):
+#         if dir not in self.__maze.COMPASS.keys():
+#             raise ValueError("dir cannot be %s. The only valid dirs are %s."
+# #                              % (str(dir), str(self.__maze.COMPASS.keys())))
 
-        if self.__maze.is_open(self.__robot, dir):
+#         if self.__maze.is_open(self.__robot, dir):
 
-            # update the drawing
-            self.__draw_robot(transparency=0)
+#             # update the drawing
+#             self.__draw_robot(transparency=0)
 
-            # move the robot
-            self.__robot += np.array(self.__maze.COMPASS[dir])
-            # if it's in a portal afterward
-            if self.maze.is_portal(self.robot):
-                self.__robot = np.array(self.maze.get_portal(tuple(self.robot)).teleport(tuple(self.robot)))
-            self.__draw_robot(transparency=255)
+#             # move the robot
+#             self.__robot += np.array(self.__maze.COMPASS[dir])
+#             # if it's in a portal afterward
+#             if self.maze.is_portal(self.robot):
+#                 self.__robot = np.array(self.maze.get_portal(tuple(self.robot)).teleport(tuple(self.robot)))
+#             self.__draw_robot(transparency=255)
 
     def reset_robot(self):
 
